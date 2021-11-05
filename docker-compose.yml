@@ -1,0 +1,20 @@
+version: "3.2"
+services:
+  consumer:
+    build: consumer
+    ports:
+      - "5000:5000"
+  wsreceiver:
+    build: wsreceiver
+    ports:
+      - "8999:8999"
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/mnesia
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
