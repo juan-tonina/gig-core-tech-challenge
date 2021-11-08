@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as http from 'http';
 import * as WebSocket from 'ws';
-import {AddressInfo} from "ws";
+import {AddressInfo} from 'ws';
 import {pushToQueue} from "./amqp";
 
 const app = express();
@@ -42,7 +42,6 @@ wss.on('connection', (ws: WebSocket) => {
     //connection is up, let's add a simple simple event
     ws.on('message', (msg: string) => {
         pushToQueue(msg);
-
     });
 
     //send immediate feedback to the incoming connection

@@ -20,5 +20,6 @@ services:
       - "15672:15672"
     volumes:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/mnesia
-      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+#      - This gave me problems, commented out until I figure it out
+#      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
 

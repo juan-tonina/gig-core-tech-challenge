@@ -17,11 +17,11 @@ func failOnError(err error, msg string) {
 
 func main() {
 	//The credentials, url and port are hardcoded. I would 100% move that to env variables if I had the time. Note that
-	// for my current job I am using windows, so I have to connect using this url instead of the commented one.
+	// for my current job I am using windows, so I have to connect using the commented url.
 
 	// Using docker, rabbitmq, node or go on windows is frustrating :)... actually, programming in windows is frustrating
-	conn, err := amqp.Dial("amqp://guest:guest@host.docker.internal:5672/")
-	//conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
+	//conn, err := amqp.Dial("amqp://guest:guest@host.docker.internal:5672/")
+	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer func(conn *amqp.Connection) {
 		err := conn.Close()
@@ -60,7 +60,8 @@ func main() {
 
 	go func() {
 		for d := range msgs {
-			// TODO push message via websocket
+			// TODO I should call this thing
+			handler(nil, nil, nil)
 			log.Printf("Received a message: %s", d.Body)
 		}
 	}()

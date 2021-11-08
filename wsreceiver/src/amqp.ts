@@ -1,6 +1,8 @@
 import * as Amqp from "amqp-ts";
 
-const connection = new Amqp.Connection("amqp://guest:guest@host.docker.internal:5672/");
+const connection = new Amqp.Connection("amqp://guest:guest@rabbitmq:5672/");
+// Windows needs the url below, because windows
+// const connection = new Amqp.Connection("amqp://guest:guest@host.docker.internal:5672/");
 const exchange = connection.declareExchange("gig-exchange");
 const queue = connection.declareQueue("gig-queue", {durable: false});
 queue.bind(exchange);
